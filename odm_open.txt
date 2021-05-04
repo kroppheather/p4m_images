@@ -1,0 +1,6 @@
+:: make sure that docker is runni
+cd c:\Users\hkropp\Documents\GitHub\WebODM
+
+ webodm.sh start 
+
+:: run http://localhost:8000 in browswer
