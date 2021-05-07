@@ -19,3 +19,19 @@ plot(green)
 plot(red)
 plot(redE)
 plot(NIR)
+
+stackC <- stack("C:/Users/hkropp/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophotoRGB.tif")
+stackR <- stack("C:/Users/hkropp/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophoto.tif")
+stackS <- stack("C:/Users/hkropp/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophoto_sun.tif")
+plot(stackR)
+plot(stackS)
+library(mapview)
+
+ndvi <- (stackR[[5]]-stackR[[3]])/(stackR[[5]]+stackR[[3]])
+ndviS <- (stackS[[5]]-stackS[[3]])/(stackS[[5]]+stackS[[3]])
+plotRGB(stackC, r=3,g=2,b=1, stretch="lin")
+
+plot(stackR[[1]])
+
+plot(ndvi)
+plot(ndviS)
