@@ -1,4 +1,5 @@
 library(raster)
+library(tmap)
 
 
 #set directory folder
@@ -43,10 +44,21 @@ plot(ndviS)
 
 #set directory folder
 dirI2 <- "E:/Google Drive/GIS/drone/campus/P4M/flight_05_19_21/ortho/out"
-multi1 <- stack(paste0(dirI2, "/05_19_21_transparent_mosaic_blue.tif"),
-                paste0(dirI2, "/05_19_21_transparent_mosaic_green.tif"),
-                paste0(dirI2, "/05_19_21_transparent_mosaic_red.tif"),
-                paste0(dirI2, "/05_19_21_transparent_mosaic_red edge.tif"),
-                paste0(dirI2, "/05_19_21_transparent_mosaic_nir.tif"))
-plotRGB(multi1, r=3,g=2,b=1)
+multi1 <- stack(paste0(dirI2, "/05_19_21_transparent_reflectance_blue.tif"),
+                paste0(dirI2, "/05_19_21_transparent_reflectance_green.tif"),
+                paste0(dirI2, "/05_19_21_transparent_reflectance_red.tif"),
+                paste0(dirI2, "/05_19_21_transparent_reflectance_red edge.tif"),
+                paste0(dirI2, "/05_19_21_transparent_reflectance_nir.tif"))
+plotRGB(multi1, r=3,g=2,b=1, scale=0.13)
 plot(multi1)
+
+ndvi <- (multi1[[5]]-multi1[[3]])/(multi1[[5]]+multi1[[3]])
+
+plot(ndvi)
+
+tm_shape(ndvi)+
+  tm_raster(title="NDVI",
+    n=8,
+    style="fisher",
+    palette="-viridis")+
+  tm_layout(legend.outside = TRUE)
