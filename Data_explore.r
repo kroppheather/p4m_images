@@ -1,5 +1,6 @@
 library(raster)
 
+
 #set directory folder
 dirI <- "C:/Users/hkropp/Google Drive/GIS/drone/campus/P4M/flight_05_03_21"
 
@@ -35,3 +36,17 @@ plot(stackR[[1]])
 
 plot(ndvi)
 plot(ndviS)
+
+
+
+
+
+#set directory folder
+dirI2 <- "E:/Google Drive/GIS/drone/campus/P4M/flight_05_19_21/ortho/out"
+multi1 <- stack(paste0(dirI2, "/05_19_21_transparent_mosaic_blue.tif"),
+                paste0(dirI2, "/05_19_21_transparent_mosaic_green.tif"),
+                paste0(dirI2, "/05_19_21_transparent_mosaic_red.tif"),
+                paste0(dirI2, "/05_19_21_transparent_mosaic_red edge.tif"),
+                paste0(dirI2, "/05_19_21_transparent_mosaic_nir.tif"))
+plotRGB(multi1, r=3,g=2,b=1)
+plot(multi1)
