@@ -151,11 +151,34 @@ png("e:\\Google Drive\\GIS\\drone\\campus\\mapping\\May3_map.png",
 
 dev.off()
 
-
+plotRGB(multi2c,r=3,g=2,b=1, scale=0.13, maxpixels=multi2c@ncols*multi2c@nrows)
 
 png("e:\\Google Drive\\GIS\\drone\\campus\\mapping\\June7_map.png",
     width=10,height=10,units="in",res=300)
-plotRGB(multi2c,r=3,g=2,b=1, maxpixels=multi2c@ncols*multi2c@nrows)
+plotRGB(multi2c,r=3,g=2,b=1, scale=0.13, maxpixels=multi2c@ncols*multi2c@nrows)
+
+arrows(466535,4767400,466550,4767400, code=0, lwd=4)
+text(466535,4767397, "0 m", cex=1.5)
+text(466550,4767397, "15 m", cex=1.5)
+
+arrows(466525,4767397,466525,4767405, lwd=3)
+text(466525,4767408, "N", cex=1.5)
+
+plot(study,add=TRUE, col=NA, border="#B8860B", lwd=3)
+
+text(466590,4767400, "study bounds ", cex=1.5, col="#B8860B")
+text(466590,4767395, "(1450 m2)", cex=1.5,col="#B8860B")
+
+text(466545,4767475, "June 7, 2021", cex=2)
+
+dev.off()
+
+plot(multi2c)
+plotRGB(multi2c,r=5,g=3,b=2, scale=0.35, maxpixels=multi2c@ncols*multi2c@nrows)
+
+png("e:\\Google Drive\\GIS\\drone\\campus\\mapping\\June7_map_false.png",
+    width=10,height=10,units="in",res=300)
+plotRGB(multi2c,r=5,g=3,b=2, scale=0.35, maxpixels=multi2c@ncols*multi2c@nrows)
 
 arrows(466535,4767400,466550,4767400, code=0, lwd=4)
 text(466535,4767397, "0 m", cex=1.5)
