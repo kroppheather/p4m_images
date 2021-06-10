@@ -24,9 +24,39 @@ plot(red)
 plot(redE)
 plot(NIR)
 
-stackC <- stack("C:/Users/hkropp/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophotoRGB.tif")
-stackR <- stack("C:/Users/hkropp/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophoto.tif")
-stackS <- stack("C:/Users/hkropp/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophoto_sun.tif")
+stackC <- stack("e:/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophotoRGB.tif")
+stackR <- stack("e:/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophoto.tif")
+stackS <- stack("e:/Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophoto_sun.tif")
+
+
+#set directory folder
+dirI2 <- "E:/Google Drive/GIS/drone/campus/P4M/flight_05_19_21/ortho/out"
+multi1 <- stack(paste0(dirI2, "/05_19_21_transparent_reflectance_blue.tif"),
+                paste0(dirI2, "/05_19_21_transparent_reflectance_green.tif"),
+                paste0(dirI2, "/05_19_21_transparent_reflectance_red.tif"),
+                paste0(dirI2, "/05_19_21_transparent_reflectance_red edge.tif"),
+                paste0(dirI2, "/05_19_21_transparent_reflectance_nir.tif"))
+
+#set directory folder
+dirI3 <- "E:/Google Drive/GIS/drone/campus/P4M/flight_06_07_21/ortho/out"
+multi2 <- stack(paste0(dirI3, "/June_7_transparent_reflectance_blue.tif"),
+                paste0(dirI3, "/June_7_transparent_reflectance_green.tif"),
+                paste0(dirI3, "/June_7_transparent_reflectance_red.tif"),
+                paste0(dirI3, "/June_7_transparent_reflectance_red edge.tif"),
+                paste0(dirI3, "/June_7_transparent_reflectance_nir.tif"))
+
+#set directory folder
+dirI4 <- "E:/Google Drive/GIS/drone/campus/P4M/flight_6_10_21/ortho/out"
+multi3 <- stack(paste0(dirI4, "/06_10_transparent_reflectance_blue.tif"),
+                paste0(dirI4, "/06_10_transparent_reflectance_green.tif"),
+                paste0(dirI4, "/06_10_transparent_reflectance_red.tif"),
+                paste0(dirI4, "/06_10_transparent_reflectance_red edge.tif"),
+                paste0(dirI4, "/06_10_transparent_reflectance_nir.tif"))
+
+plotRGB(multi3, r=3,g=2,b=1, scale=0.25, stretch="lin")
+plotRGB(multi3, r=5,g=3,b=2, scale=0.35, stretch="lin")
+
+
 plot(stackR)
 plot(stackS)
 library(mapview)
@@ -44,13 +74,6 @@ plot(ndviS)
 
 
 
-#set directory folder
-dirI2 <- "E:/Google Drive/GIS/drone/campus/P4M/flight_05_19_21/ortho/out"
-multi1 <- stack(paste0(dirI2, "/05_19_21_transparent_reflectance_blue.tif"),
-                paste0(dirI2, "/05_19_21_transparent_reflectance_green.tif"),
-                paste0(dirI2, "/05_19_21_transparent_reflectance_red.tif"),
-                paste0(dirI2, "/05_19_21_transparent_reflectance_red edge.tif"),
-                paste0(dirI2, "/05_19_21_transparent_reflectance_nir.tif"))
 plotRGB(multi1, r=3,g=2,b=1, scale=0.13)
 plot(multi1)
 
@@ -68,22 +91,11 @@ tm_shape(ndvi)+
 
 
 
-#set directory folder
-dirI3 <- "E:/Google Drive/GIS/drone/campus/P4M/flight_06_07_21/ortho/out"
-multi2 <- stack(paste0(dirI3, "/June_7_transparent_reflectance_blue.tif"),
-                paste0(dirI3, "/June_7_transparent_reflectance_green.tif"),
-                paste0(dirI3, "/June_7_transparent_reflectance_red.tif"),
-                paste0(dirI3, "/June_7_transparent_reflectance_red edge.tif"),
-                paste0(dirI3, "/June_7_transparent_reflectance_nir.tif"))
-plotRGB(multi2, r=3,g=2,b=1, scale=0.13)
+
 plot(multi2[[1]])
 
 
 
-
-#export images
-
-stackC <- stack("e://Google Drive/GIS/drone/campus/P4M/flight_05_03_21/ortho/odm_orthophotoRGB.tif")
 
 
 #buckthorn crop
@@ -92,6 +104,8 @@ extentB <- extent(466520,466610,4767390,4767480)
 multi2c <- crop(multi2,extentB)
 stackCc <- crop(stackC, extentB)
 multi1c <- crop(multi1,extentB)
+multi3c <- crop(multi3,extentB)
+
 
 plotRGB(stackCc,r=3,g=2,b=1)
 
@@ -195,3 +209,60 @@ text(466590,4767395, "(1450 m2)", cex=1.5,col="#B8860B")
 text(466545,4767475, "June 7, 2021", cex=2)
 
 dev.off()
+
+
+#full June 10
+png("e:\\Google Drive\\GIS\\drone\\campus\\mapping\\June10_full_map_false.png",
+    width=10,height=10,units="in",res=300)
+plotRGB(multi3,r=5,g=3,b=2, scale=0.35, maxpixels=multi3@ncols*multi3@nrows, stretch="lin")
+
+dev.off()
+
+#full June 10
+png("e:\\Google Drive\\GIS\\drone\\campus\\mapping\\June10_full_map_true.png",
+    width=10,height=10,units="in",res=300)
+plotRGB(multi3,r=3,g=2,b=1, scale=0.3, maxpixels=multi3@ncols*multi3@nrows, stretch="lin")
+
+dev.off()
+
+png("e:\\Google Drive\\GIS\\drone\\campus\\mapping\\June10_map_false.png",
+    width=10,height=10,units="in",res=300)
+plotRGB(multi3c,r=5,g=3,b=2, scale=0.35, maxpixels=multi3c@ncols*multi3c@nrows)
+
+arrows(466535,4767400,466550,4767400, code=0, lwd=4)
+text(466535,4767397, "0 m", cex=1.5)
+text(466550,4767397, "15 m", cex=1.5)
+
+arrows(466525,4767397,466525,4767405, lwd=3)
+text(466525,4767408, "N", cex=1.5)
+
+plot(study,add=TRUE, col=NA, border="#B8860B", lwd=3)
+
+text(466590,4767400, "study bounds ", cex=1.5, col="#B8860B")
+text(466590,4767395, "(1450 m2)", cex=1.5,col="#B8860B")
+
+text(466545,4767475, "June 10, 2021", cex=2)
+
+dev.off()
+
+
+png("e:\\Google Drive\\GIS\\drone\\campus\\mapping\\June10_map.png",
+    width=10,height=10,units="in",res=300)
+plotRGB(multi3c,r=3,g=2,b=1, scale=0.13, maxpixels=multi3c@ncols*multi3c@nrows)
+
+arrows(466535,4767400,466550,4767400, code=0, lwd=4)
+text(466535,4767397, "0 m", cex=1.5)
+text(466550,4767397, "15 m", cex=1.5)
+
+arrows(466525,4767397,466525,4767405, lwd=3)
+text(466525,4767408, "N", cex=1.5)
+
+plot(study,add=TRUE, col=NA, border="#B8860B", lwd=3)
+
+text(466590,4767400, "study bounds ", cex=1.5, col="#B8860B")
+text(466590,4767395, "(1450 m2)", cex=1.5,col="#B8860B")
+
+text(466545,4767475, "June 10, 2021", cex=2)
+
+dev.off()
+
