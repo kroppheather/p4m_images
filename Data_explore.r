@@ -266,3 +266,40 @@ text(466545,4767475, "June 10, 2021", cex=2)
 
 dev.off()
 
+
+
+#compare reflectance maps between odm from buckthorn flights
+
+odmB1 <- stack("E:\\Google Drive\\GIS\\drone\\campus\\P4M\\orthos\\ODM\\odm_buckthorn_pt1.tif")
+
+plot(odmB1)
+
+pix4d <- stack("K:\\Environmental_Studies\\hkropp\\GIS\\drone\\campus\\P4M\\flight_6_25_21_buckthorn_p1\\ortho\\6_25_21_buckthorn_part1\\4_index\\reflectance\\6_25_21_buckthorn_part1_transparent_reflectance_blue.tif",
+               "K:\\Environmental_Studies\\hkropp\\GIS\\drone\\campus\\P4M\\flight_6_25_21_buckthorn_p1\\ortho\\6_25_21_buckthorn_part1\\4_index\\reflectance\\6_25_21_buckthorn_part1_transparent_reflectance_green.tif",
+               "K:\\Environmental_Studies\\hkropp\\GIS\\drone\\campus\\P4M\\flight_6_25_21_buckthorn_p1\\ortho\\6_25_21_buckthorn_part1\\4_index\\reflectance\\6_25_21_buckthorn_part1_transparent_reflectance_red.tif",
+               "K:\\Environmental_Studies\\hkropp\\GIS\\drone\\campus\\P4M\\flight_6_25_21_buckthorn_p1\\ortho\\6_25_21_buckthorn_part1\\4_index\\reflectance\\6_25_21_buckthorn_part1_transparent_reflectance_red edge.tif",
+               "K:\\Environmental_Studies\\hkropp\\GIS\\drone\\campus\\P4M\\flight_6_25_21_buckthorn_p1\\ortho\\6_25_21_buckthorn_part1\\4_index\\reflectance\\6_25_21_buckthorn_part1_transparent_reflectance_nir.tif")
+
+plot(pix4d)
+
+plot(pix4d[[5]]+pix4d[[3]])
+plot( (pix4d[[5]]-pix4d[[3]])/(pix4d[[5]]+pix4d[[3]]))
+
+NDVI4D <- (pix4d[[5]]-pix4d[[3]])/(pix4d[[5]]+pix4d[[3]])
+plot(NDVI4D)
+
+NDVIODM <- (odmB1[[5]] - odmB1[[3]])/(odmB1[[5]] + odmB1[[3]])
+  
+  
+  plot(NDVIODM)
+  
+plot(NDVIODM)
+
+#reproject to match NDVI
+
+NDVIODMP <- projectRaster(NDVIODM,NDVI4D)
+
+NDVIDiff <- NDVIODMP - NDVI4D
+plot(NDVIDiff)
+
+plot(NDVIODMP)
