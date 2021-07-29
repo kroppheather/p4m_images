@@ -303,3 +303,17 @@ NDVIDiff <- NDVIODMP - NDVI4D
 plot(NDVIDiff)
 
 plot(NDVIODMP)
+
+
+dome.ref <- stack("K:\\Environmental_Studies\\hkropp\\GIS\\drone\\Dome\\maps\\07_29_21_dome_transparent_reflectance_blue.tif",
+                  "K:\\Environmental_Studies\\hkropp\\GIS\\drone\\Dome\\maps\\07_29_21_dome_transparent_reflectance_green.tif",
+                  "K:\\Environmental_Studies\\hkropp\\GIS\\drone\\Dome\\maps\\07_29_21_dome_transparent_reflectance_red.tif",
+                  "K:\\Environmental_Studies\\hkropp\\GIS\\drone\\Dome\\maps\\07_29_21_dome_transparent_reflectance_red edge.tif",
+                  "K:\\Environmental_Studies\\hkropp\\GIS\\drone\\Dome\\maps\\07_29_21_dome_transparent_reflectance_nir.tif")
+plot(dome.ref)
+
+plotRGB(dome.ref, r=3,g=2,b=1, scale=0.1)
+
+ndvi.dome <- (dome.ref[[5]]-dome.ref[[3]])/(dome.ref[[5]]+dome.ref[[3]])
+plot(ndvi.dome)
+viewRGB(dome.ref)
