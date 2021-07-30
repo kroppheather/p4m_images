@@ -316,4 +316,10 @@ plotRGB(dome.ref, r=3,g=2,b=1, scale=0.1)
 
 ndvi.dome <- (dome.ref[[5]]-dome.ref[[3]])/(dome.ref[[5]]+dome.ref[[3]])
 plot(ndvi.dome)
-viewRGB(dome.ref)
+viewRGB(dome.ref, quantiles=c(0.01,1))
+
+mapview(ndvi.dome)
+
+
+dome.test <- stack("E:/Google Drive/GIS/drone/Dome/agi/test.tif")
+plot(dome.test)
