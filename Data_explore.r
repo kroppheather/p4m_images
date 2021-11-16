@@ -5,7 +5,7 @@ library(sf)
 
 
 #set directory folder
-dirI <- "C:/Users/hkropp/Google Drive/GIS/drone/campus/P4M/flight_05_03_21"
+dirI <- "e:/Google Drive/GIS/drone/campus/P4M/flight_05_03_21"
 
 #read in sample images
 rgbs <- stack(paste0(dirI,"/DJI_0810.jpg"))
